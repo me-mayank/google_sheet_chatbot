@@ -4,7 +4,7 @@ from typing import Optional
 class Settings(BaseSettings):
     GROQ_API_KEY: str
     GOOGLE_DOC_URL: str
-    MODEL_NAME: str = "llama-3.3-70b-versatile"
+    MODEL_NAME: str = "openai/gpt-oss-120b"
     MODEL_PROVIDER: str = "groq"
     ALLOWED_ORIGINS: str = "*"
     DOCUMENT_CACHE_TTL_SECONDS: int = 300
