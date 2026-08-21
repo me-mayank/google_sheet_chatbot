@@ -13,7 +13,7 @@ async def fetch_google_doc_text(url: str) -> str:
     doc_id = match.group(1)
     export_url = f"https://docs.google.com/document/d/{doc_id}/export?format=txt"
     
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(follow_redirects=True) as client:
         try:
             response = await client.get(export_url, timeout=10.0)
         except httpx.RequestError as e:
