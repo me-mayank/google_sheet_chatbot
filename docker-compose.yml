@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GOOGLE_DOC_URL=${GOOGLE_DOC_URL}
+      - DEFAULT_CONTEXT_ID=icpc_default
+      - CORS_ORIGINS=http://localhost,http://localhost:5173
+    volumes:
+      - ./backend/app/core/contexts:/app/app/core/contexts
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:80"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
